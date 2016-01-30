@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Websynth</title>
+
+		<link type="text/css" rel="stylesheet" href="js/vendors/jquery-ui/jquery-ui.min.css">
+
+		<style>
+			html, body {
+				padding: 0;
+				margin: 0;
+				font-family: Arial;
+				font-size: 16px;
+			}
+
+			#websynth-canvas {
+				position: relative;
+				min-height: 500px;
+				background: #eee;
+			}
+
+			.websynth-module {
+				position: absolute !important;
+				min-width: 200px;
+				background: #fff;
+			}
+
+			.websynth-module h3 {
+				margin: 2px;
+				padding: 2px 8px;
+				background: #ddd;
+			}
+
+			.websynth-module .content {
+				padding: 10px;
+			}
+
+			.synth-pad {
+				overflow: hidden;
+				background: #eee;
+			}
+
+			.synth-pad a {
+				width: 40px;
+				height: 100px;
+				margin: 4px;
+				float: left;
+				display: block;
+				background: #fff;
+			}
+
+			.synth-pad a.sharp {
+				background: #404040;
+			}
+		</style>
+
+		<script src="js/vendors/jquery-2.2.0.min.js"></script>
+		<script src="js/vendors/jquery-ui/jquery-ui.min.js"></script>
+		<script src="js/Harmony.js"></script>
+
+		<script src="js/AudioModule.js"></script>
+		<script src="js/AudioModule.VCO.js"></script>
+		<script src="js/AudioModule.VCA.js"></script>
+		<script src="js/AudioModule.MasterOutput.js"></script>
+	</head>
+	<body>
+
+		<div class="synth-pad">
+			<a href="#" data-note="A4"></a>
+			<a href="#" data-note="A#4" class="sharp"></a>
+			<a href="#" data-note="B4"></a>
+			<a href="#" data-note="C4"></a>
+		</div>
+
+		<div id="websynth-canvas"></div>
+
+		<script>
+
+			var vco = new AudioModule.VCO();
+			var vca = new AudioModule.VCA();
+			var master = new AudioModule.MasterOutput();
+
+			vca.connectTo(master);
+			vco.connectTo(vca);
+
+			vco.buildUI();
+			vca.buildUI();
+
+			$( function() {
+				$('.synth-pad a').on('mousedown', function(e) {
+					e.preventDefault();
+
+					var note = $(this).attr('data-note');
+					var freq = Harmony.noteToFreq(note);
+
+					var oscIndex = vco.start(freq);
+
+					$(this).attr('data-osc-index', oscIndex);
+
+					return false;
+				});
+
+				$('.synth-pad a').on('mouseup', function(e) {
+					e.preventDefault();
+
+					var oscIndex = $(this).attr('data-osc-index');
+					vco.stop(oscIndex);
+
+					$(this).attr('data-osc-index', null);
+
+					return false;
+				});
+			});
+		</script>
+	</body>
+</html>
