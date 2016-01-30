@@ -6,6 +6,12 @@ AudioModule.MasterOutput = (function() {
 		this.processor = AudioModule.context.destination;
 	};
 
+
+	// UX Building
+	MasterOutput.prototype.buildUI = function() {
+
+		this.spawnWidget('MasterOutput');
+	}
 	
 	// Export MasterOutput
 	return MasterOutput;

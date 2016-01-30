@@ -16,7 +16,7 @@ var AudioModule = {
 			var uiHtml = '<div class="websynth-module websynth-'+title.toLowerCase()+'">'+
 				'<h3>'+title+'</h3>'+
 				'<div class="content">'+
-					template +
+					(template ? template : '') +
 				'</div>'+
 			'</div>';
 
