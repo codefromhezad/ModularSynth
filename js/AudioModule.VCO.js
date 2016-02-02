@@ -51,9 +51,10 @@ AudioModule.VCO = (function() {
 
 	// UX Building
 	VCO.prototype.buildUI = function() {
-
 		this.spawnWidget(
 			'VCO', 
+
+			[0, 1],
 
 			'<div class="websynth-input">'+
 				'<label>Oscillator</label>'+

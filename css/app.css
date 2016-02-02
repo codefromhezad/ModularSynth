@@ -1,0 +1,73 @@
+html, body {
+	padding: 0;
+	margin: 0;
+	font-family: Arial;
+	font-size: 16px;
+}
+
+#websynth-canvas {
+	position: relative;
+	min-height: 500px;
+	background: #eee;
+}
+
+.websynth-module {
+	position: absolute !important;
+	min-width: 200px;
+	background: #fff;
+}
+
+.websynth-module h3 {
+	margin: 2px;
+	padding: 2px 8px;
+	background: #ddd;
+}
+
+.websynth-module .connectors {
+	position: absolute;
+	top: 0;
+	width: 8px;
+	height: 100%;
+}
+
+.websynth-module .connectors.inputs { left: -4px; }
+.websynth-module .connectors.outputs { right: -4px; }
+
+.websynth-module .connectors .connector {
+	width: 8px;
+	height: 8px;
+	background: #fff;
+	border: 1px solid #ccc;
+	margin: 8px 0;
+}
+
+.websynth-module .content {
+	padding: 10px;
+}
+
+.synth-pad {
+	overflow: hidden;
+	background: #eee;
+}
+
+.synth-pad a {
+	width: 40px;
+	height: 100px;
+	margin: 4px;
+	float: left;
+	display: block;
+	background: #fff;
+}
+
+.synth-pad a.sharp {
+	background: #404040;
+}
+
+.svg-line-wrapper {
+	position: absolute;
+}
+
+.svg-line-wrapper line {
+	fill: none;
+	stroke: #000;
+}

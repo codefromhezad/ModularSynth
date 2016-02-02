@@ -2,10 +2,9 @@ AudioModule.VCA = (function() {
 
 	// Constructor
 	var VCA = function() {
-		AudioModule.construct(this, "VCA");
+		AudioModule.construct(this);
 
 		this.processor = AudioModule.context.createGain();
-
 		this.setGain(0.7);
 	};
 	
@@ -20,9 +19,10 @@ AudioModule.VCA = (function() {
 
 	// UX Building
 	VCA.prototype.buildUI = function() {
-
 		this.spawnWidget(
 			'VCA', 
+
+			[1, 1],
 
 			'<div class="websynth-input">'+
 				'<label>Gain</label>'+
