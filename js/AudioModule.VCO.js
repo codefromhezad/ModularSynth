@@ -50,7 +50,7 @@ AudioModule.VCO = (function() {
 
 
 	// UX Building
-	VCO.prototype.buildUI = function() {
+	VCO.prototype.buildUI = function(css) {
 		this.spawnWidget(
 			'VCO', 
 
@@ -74,7 +74,9 @@ AudioModule.VCO = (function() {
 						module.setType(newType);
 					}
 				});
-			}
+			},
+
+			css
 		);
 	}
 	

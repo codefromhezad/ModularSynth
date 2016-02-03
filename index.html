@@ -25,25 +25,25 @@
 			<a href="#" data-note="C4"></a>
 		</div>
 
+		<div class="available-modules">
+			<h4>Available modules</h4>
+			<a href="#" class="module-icon module-vca" title="Gain node - Amplify input to output" data-slug="VCA">VCA</a>
+			<a href="#" class="module-icon module-vco" title="Oscillator node - Generate an oscillating signal" data-slug="VCO">VCO</a>
+		</div>
+
 		<div id="websynth-canvas"></div>
 
 		<script>
 
-			var vco = new AudioModule.VCO();
-			var vca = new AudioModule.VCA();
-			var master = new AudioModule.MasterOutput();
-
-			//vca.connectTo(master);
-			//vco.connectTo(vca);
-
-			AudioModule.UI.setupListeners();
-
-			vco.buildUI();
-			vca.buildUI();
-			master.buildUI();
+			AudioModule.boot();
 
 			$( function() {
 				
+				$('.available-modules').on('click', 'a.module-icon', function(e) {
+					var slug = $(this).attr('data-slug');
+					AudioModule.UI.spawnModule(slug);
+				});
+
 				$('.synth-pad a').on('mousedown', function(e) {
 					e.preventDefault();
 

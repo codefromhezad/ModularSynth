@@ -8,8 +8,8 @@ AudioModule.MasterOutput = (function() {
 
 
 	// UX Building
-	MasterOutput.prototype.buildUI = function() {
-		this.spawnWidget('MasterOutput', [1, 0]);
+	MasterOutput.prototype.buildUI = function(css) {
+		this.spawnWidget('MasterOutput', [1, 0], null, null, css);
 	}
 	
 	// Export MasterOutput

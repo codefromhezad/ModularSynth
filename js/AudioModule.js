@@ -4,7 +4,9 @@ var AudioModule = {
 	
 	globals: {
 		references: [],
-		connectionsReferences: {}
+		connectionsReferences: {},
+
+		masterModule: null
 	},
 
 	UI: {
@@ -99,6 +101,17 @@ var AudioModule = {
 			AudioModule.UI.$currentSvgLine = null;
 
 			return true;
+		},
+
+		spawnModule: function(moduleSlug, css) {
+			if( AudioModule[moduleSlug] === undefined ) {
+				console.error(moduleSlug + ' is not a valid AudioModule name');
+				return null;
+			}
+
+			var mod = new AudioModule[moduleSlug]();
+			mod.buildUI(css);
+			return mod;
 		},
 
 		setupListeners: function() {
@@ -208,6 +221,18 @@ var AudioModule = {
 		}
 	},
 
+	boot: function() {
+		AudioModule.globals.masterModule = new AudioModule.MasterOutput();
+		AudioModule.globals.masterModule.buildUI({
+			top: '50%',
+			right:'2%'
+		});
+
+		AudioModule.UI.setupListeners();
+
+		AudioModule.generateListOfSpawnerLinks
+	},
+
 	construct: function(module) {
 		module.input = null;
 		module.output = null;
@@ -219,7 +244,9 @@ var AudioModule = {
 
 		module.$ui = null;
 
-		module.spawnWidget = function(title, numInputsAndOutputs, template, callback) {
+		module.iconImage = null;
+
+		module.spawnWidget = function(title, numInputsAndOutputs, template, callback, css) {
 			var inputsHTML = '';
 			var outputsHTML = '';
 
@@ -231,7 +258,8 @@ var AudioModule = {
 				outputsHTML += '<div class="connector output" data-n="'+n+'"></div>';
 			}
 
-			var uiHtml = '<div class="websynth-module websynth-'+title.toLowerCase()+'" data-reference-id="'+module.referenceId+'">'+
+			var uiHtml = '<div class="websynth-module websynth-'+title.toLowerCase()+'" '+
+							  'data-reference-id="'+module.referenceId+'">'+
 				'<h3>'+title+'</h3>'+
 				'<div class="content">'+
 					(template ? template : '') +
@@ -241,6 +269,10 @@ var AudioModule = {
 			'</div>';
 
 			var $uiItem = $(uiHtml);
+
+			if( css ) {
+				$uiItem.css(css);
+			}
 
 			$uiItem.draggable({
 				handle: "h3",

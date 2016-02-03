@@ -5,6 +5,34 @@ html, body {
 	font-size: 16px;
 }
 
+.available-modules {
+	border-bottom: 2px solid #aaa;
+	background: #eee;
+	padding: 4px;
+}
+
+.available-modules .module-icon {
+	display: inline-block;
+	padding-top: 80px;
+	width: 110px;
+	line-height: 30px;
+	text-align: center;
+	background: #ccc no-repeat center 29%;
+    background-size: 60%;
+	text-decoration: none;
+	color: #666;
+	font-size: 14px;
+}
+
+.available-modules .module-icon.module-vco { background-image: url('../img/module-icon-vco.svg'); }
+.available-modules .module-icon.module-vca { background-image: url('../img/module-icon-vca.svg'); }
+
+.available-modules h4 {
+	color: #888;
+	margin: 0;
+	padding: 0;
+}
+
 #websynth-canvas {
 	position: relative;
 	min-height: 500px;
@@ -19,9 +47,15 @@ html, body {
 
 .websynth-module h3 {
 	margin: 2px;
-	padding: 2px 8px;
-	background: #ddd;
+    padding: 2px 8px;
+    background: #ddd no-repeat 97% center / 18%;
+    font-size: 14px;
+    line-height: 50px;
 }
+
+.websynth-module.websynth-vco h3 { background-image: url('../img/module-icon-vco.svg'); }
+.websynth-module.websynth-vca h3 { background-image: url('../img/module-icon-vca.svg'); }
+.websynth-module.websynth-masteroutput h3 { background-image: url('../img/module-icon-masteroutput.svg'); }
 
 .websynth-module .connectors {
 	position: absolute;

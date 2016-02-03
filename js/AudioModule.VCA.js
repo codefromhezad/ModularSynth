@@ -18,7 +18,7 @@ AudioModule.VCA = (function() {
 
 
 	// UX Building
-	VCA.prototype.buildUI = function() {
+	VCA.prototype.buildUI = function(css) {
 		this.spawnWidget(
 			'VCA', 
 
@@ -39,7 +39,9 @@ AudioModule.VCA = (function() {
 						$uiItem.find('.gain-value').text(parsedValue.toFixed(2));
 					}
 				});
-			}
+			},
+
+			css
 		);
 	}
 
