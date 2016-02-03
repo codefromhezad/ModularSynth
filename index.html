@@ -41,7 +41,11 @@
 				
 				$('.available-modules').on('click', 'a.module-icon', function(e) {
 					var slug = $(this).attr('data-slug');
-					AudioModule.UI.spawnModule(slug);
+					var $widget = AudioModule.UI.spawnModule(slug);
+
+					if( $widget ) {
+						$(AudioModule.UI.containerSelector).append($widget);
+					}
 				});
 
 				$('.synth-pad a').on('mousedown', function(e) {

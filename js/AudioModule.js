@@ -113,8 +113,7 @@ var AudioModule = {
 			}
 
 			var mod = new AudioModule[moduleSlug]();
-			mod.buildUI(css);
-			return mod;
+			return mod.buildUI(css);
 		},
 
 		setupListeners: function() {
@@ -226,14 +225,15 @@ var AudioModule = {
 
 	boot: function() {
 		AudioModule.globals.masterModule = new AudioModule.MasterOutput();
-		AudioModule.globals.masterModule.buildUI({
+		
+		var $masterWidget = AudioModule.globals.masterModule.buildUI({
 			top: '50%',
 			right:'2%'
 		});
+		
+		$(AudioModule.UI.containerSelector).append($masterWidget);
 
 		AudioModule.UI.setupListeners();
-
-		AudioModule.generateListOfSpawnerLinks
 	},
 
 	construct: function(module) {
@@ -326,8 +326,6 @@ var AudioModule = {
 					callback($uiItem, module);
 				}) (module, $uiItem);
 			}
-			
-			$(AudioModule.UI.containerSelector).append($uiItem);
 
 			return $uiItem;
 		}

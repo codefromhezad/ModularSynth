@@ -51,7 +51,7 @@ AudioModule.VCO = (function() {
 
 	// UX Building
 	VCO.prototype.buildUI = function(css) {
-		this.spawnWidget(
+		return this.spawnWidget(
 			'VCO', 
 
 			[0, 1],

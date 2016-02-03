@@ -19,7 +19,7 @@ AudioModule.VCA = (function() {
 
 	// UX Building
 	VCA.prototype.buildUI = function(css) {
-		this.spawnWidget(
+		return this.spawnWidget(
 			'VCA', 
 
 			[1, 1],

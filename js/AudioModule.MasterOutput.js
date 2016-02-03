@@ -9,7 +9,7 @@ AudioModule.MasterOutput = (function() {
 
 	// UX Building
 	MasterOutput.prototype.buildUI = function(css) {
-		this.spawnWidget('MasterOutput', [1, 0], null, null, css);
+		return this.spawnWidget('MasterOutput', [1, 0], null, null, css);
 	}
 	
 	// Export MasterOutput
