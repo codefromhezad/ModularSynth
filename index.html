@@ -48,29 +48,6 @@
 					}
 				});
 
-				$('.synth-pad a').on('mousedown', function(e) {
-					e.preventDefault();
-
-					var note = $(this).attr('data-note');
-					var freq = Harmony.noteToFreq(note);
-
-					var oscIndex = vco.start(freq);
-
-					$(this).attr('data-osc-index', oscIndex);
-
-					return false;
-				});
-
-				$('.synth-pad a').on('mouseup', function(e) {
-					e.preventDefault();
-
-					var oscIndex = $(this).attr('data-osc-index');
-					vco.stop(oscIndex);
-
-					$(this).attr('data-osc-index', null);
-
-					return false;
-				});
 			});
 		</script>
 	</body>

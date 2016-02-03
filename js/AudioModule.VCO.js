@@ -5,6 +5,7 @@ AudioModule.VCO = (function() {
 		AudioModule.construct(this);
 
 		this.type = "sine";
+		this.baseFrequency = Harmony.noteToFreq("A4");
 		this.processor = [];
 	};
 	
@@ -16,6 +17,10 @@ AudioModule.VCO = (function() {
 		this.forEachProcessor( function(processor, module) {
 			processor.type = module.type;
 		});
+	}
+
+	VCO.prototype.setBaseFrequency = function(freq) {
+		this.baseFrequency = freq;
 	}
 
 
@@ -57,13 +62,20 @@ AudioModule.VCO = (function() {
 			[0, 1],
 
 			'<div class="websynth-input">'+
-				'<label>Oscillator</label>'+
+				'<label>Wavetype</label>'+
 				'<select class="type-selector">'+
 					'<option value="sine" '+(this.type == 'sine' ? 'selected' : '')+'>Sine</option>'+
 					'<option value="square" '+(this.type == 'square' ? 'selected' : '')+'>Square</option>'+
 					'<option value="sawtooth" '+(this.type == 'sawtooth' ? 'selected' : '')+'>Sawtooth</option>'+
 					'<option value="triangle" '+(this.type == 'triangle' ? 'selected' : '')+'>Triangle</option>'+
 				'</select>'+
+			'</div>'+
+			'<div class="websynth-input">'+
+				'<label>Base frequency (Hz)</label>'+
+				'<input type="text" class="frequency-selector" value="'+this.baseFrequency+'">'+
+			'</div>'+
+			'<div class="websynth-buttonbar">'+
+				'<button class="playback-control start">Start</button>'+
 			'</div>',
 			
 			function($uiItem, module) {
@@ -73,6 +85,30 @@ AudioModule.VCO = (function() {
 						var newType = ui.item.value;
 						module.setType(newType);
 					}
+				});
+
+				$uiItem.find('.frequency-selector').on('change', function(e) {
+					module.setBaseFrequency($(this).val());
+				});
+
+				$uiItem.find('.playback-control').on('click', function(e) {
+					e.preventDefault();
+					var $this = $(this);
+					
+					if( $this.hasClass('start') ) {
+						var freq = module.baseFrequency;
+						var oscIndex = module.start(freq);
+
+						$this.attr('data-osc-index', oscIndex);
+						$this.text('Stop').removeClass('start');
+					} else {
+						var oscIndex = $this.attr('data-osc-index');
+						module.stop(oscIndex);
+
+						$this.attr('data-osc-index', null);
+						$this.text('Start').addClass('start');
+					}
+					return false;
 				});
 			},
 
