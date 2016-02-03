@@ -93,6 +93,9 @@ var AudioModule = {
 				return false;
 			}
 
+			inputModule.$ui.addClass('input-connected');
+			outputModule.$ui.addClass('output-connected');
+
 			outputModule.connectTo(inputModule);
 			AudioModule.UI.svgConnectionsReferences[outputModule.referenceId + '-' + inputModule.referenceId] = AudioModule.UI.$currentSvgLine;
 			AudioModule.UI.svgOutputsReferences[outputModule.referenceId] = inputModule.referenceId;
